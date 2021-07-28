@@ -23,8 +23,7 @@ export default function Deck() {
         }
       }
     }
-    if (!(dependency == deck)) setDependency(deck);
-  }, [dependency]);
+  }, []);
 
   return (
     <section className="container">
@@ -62,9 +61,12 @@ export default function Deck() {
               <Link
                 to="/"
                 className="btn btn-danger"
-                onClick={() =>
-                  window.confirm("Confirm Delete?") ? deleteDeck(deck.id) : null
-                }
+                onClick={() => {
+                  if (window.confirm("Confirm Delete?")) {
+                    deleteDeck(deck.id);
+                    setDependency({});
+                  }
+                }}
               >
                 Delete
               </Link>

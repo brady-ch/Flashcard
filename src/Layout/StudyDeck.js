@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { readDeck } from "../utils/api";
 
 // Creates the study deck component
-export default function StudyDeck(props) {
+export default function StudyDeck() {
   const { deckId } = useParams();
   const [flip, setFlip] = useState(true);
   const [index, setIndex] = useState(0);

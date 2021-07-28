@@ -13,7 +13,7 @@
     "react-scripts": "4.0.0"
   },
   "scripts": {
-    "start": "concurrently 'npm run start:server' 'npm run start:react'",
+    "start": "concurrently \"npm run start:server\" \"npm run start:react\"",
     "start:react": "react-scripts start",
     "start:server": "json-server ./data/db.json",
     "build": "react-scripts build",

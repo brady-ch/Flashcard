@@ -16,16 +16,8 @@ export default function Form(props) {
   const { newItem, isDeck } = props;
   const [deck, setDeck] = useState({ cards: [] });
   const [card, setCard] = useState({});
-  const [inputsFromForm, setInputsFromForm] = useState({
-    firstInput: "",
-    secondInput: "",
-  });
-  const [formNames, setFormNames] = useState({
-    labelFirst: "",
-    labelSecond: "",
-    titleNewOrEdit: "",
-    titleCardOrDeck: "",
-  });
+  const [inputsFromForm, setInputsFromForm] = useState({});
+  const [formNames, setFormNames] = useState({});
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -168,6 +160,7 @@ export default function Form(props) {
       );
     }
   }
+
   return (
     <section className="container">
       <FormBreadcrumb
@@ -207,6 +200,7 @@ export default function Form(props) {
           <button
             className="btn btn-primary mx-2"
             onClick={(event) => submitHandler(event)}
+            type="submit"
           >
             {newItem ? "Save" : "Submit"}
           </button>

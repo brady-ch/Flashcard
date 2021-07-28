@@ -4,9 +4,9 @@ import { deleteDeck, listDecks } from "../utils/api/index";
 // This is the component that is used by DisplayCards to list the deck items
 export default function ListDeckItems(props) {
   const [decks, setDecks] = useState([]);
+  const [reRender, setReRender] = useState(false);
   useEffect(() => {
     const abortController = new AbortController();
-
     try {
       listDecks(abortController.signal).then((elements) => setDecks(elements));
     } catch (error) {
@@ -16,7 +16,11 @@ export default function ListDeckItems(props) {
         throw error;
       }
     }
-  });
+  }, [reRender]);
+
+  useEffect(() => {
+    setReRender((reRender) => !reRender);
+  }, []);
 
   return (
     <section>
@@ -42,11 +46,12 @@ export default function ListDeckItems(props) {
                 <span className="float-right">
                   <button
                     className="btn btn-danger"
-                    onClick={() =>
-                      window.confirm("Confirm Delete?")
-                        ? deleteDeck(deck.id)
-                        : null
-                    }
+                    onClick={() => {
+                      if (window.confirm("Confirm Delete?")) {
+                        setReRender((reRender) => !reRender);
+                        deleteDeck(deck.id);
+                      }
+                    }}
                   >
                     Delete
                   </button>
